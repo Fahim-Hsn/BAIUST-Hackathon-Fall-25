@@ -1,61 +1,121 @@
-# MonBondhu
+# MonBondhu - Mental and Physical Health Support Platform
 
-মনবন্ধু: গ্রামের মানুষের জন্য স্বাস্থ্য সহায়তা প্ল্যাটফর্ম (Bangla-first UI)
+MonBondhu is a web-based platform designed to provide mental and physical health support, specifically for rural Bangladesh. The platform allows users to track their mood, submit anonymous help requests, and find local clinics. It is built with a **Bangla** language interface for easy accessibility.
 
-## রান লোকালি
+---
 
-### 1) ব্যাকএন্ড
+## **Features**
 
-- ফোল্ডার: `backend`
-- `.env` তৈরি করুন (উদাহরণ):
+### **For Users**
+- **Mood Tracker**: Track and save daily moods (happy, sad, etc.) with optional notes.
+- **Help Requests**: Submit anonymous help requests for mental or physical health support.
+- **History**: View past moods and help requests.
 
-```
-PORT=5000
-MONGO_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/monbondhu?retryWrites=true&w=majority
-MONGO_DB=monbondhu
-SKIP_DB=false
-```
+### **For Admin**
+- **Help Requests Management**: View and respond to all user help requests.
+- **Analytics Dashboard**: View mood trends and track platform usage.
+- **User Data**: View user data and mood statistics.
 
-- ইনস্টল ও রান:
+---
 
-```
-cd backend
-npm install
-npm run dev
-```
+## **API Endpoints**
 
-> ডাটাবেস ছাড়া চালাতে চাইলে `.env` এ `SKIP_DB=true` দিন। এতে ইন-মেমরি স্টোর ব্যবহার হবে এবং MongoDB লাগবে না।
+### **1. User Registration/Login**
+- **Register User**:  
+  **POST** `http://localhost:5005/api/users/register`  
+  Used to register a new user in the system.
 
-### 2) ফ্রন্টএন্ড
+- **Login User**:  
+  **POST** `http://localhost:5005/api/users/login`  
+  Used to authenticate and log in a user.
 
-- ফোল্ডার: `frontend`
-- `.env` (ঐচ্ছিক):
+- **Recover User**:  
+  **POST** `http://localhost:5005/api/users/recover`  
+  Used for password recovery or account recovery.
 
-```
-VITE_API_URL=http://localhost:5001/api
-```
+### **2. Mood & Help Endpoints**
+- **Submit Mood**:  
+  **POST** `http://localhost:5005/api/mood`  
+  Used to submit mood data for the user.
 
-- ইনস্টল ও রান:
+- **Get User Mood History**:  
+  **GET** `http://localhost:5005/api/mood/:userId`  
+  Retrieve all mood data for a specific user based on their `userId`.
 
-```
-cd frontend
-npm install
-npm run dev
-```
+- **Submit Help Request**:  
+  **POST** `http://localhost:5005/api/help`  
+  Used to submit a help request (mental health, medical support, etc.).
 
-ব্রাউজার: `http://localhost:5173`
+- **Get Help Requests**:  
+  **GET** `http://localhost:5005/api/help`  
+  Retrieve all help requests submitted by the user or available in the system.
 
-## API এন্ডপয়েন্ট
+### **3. Server Status**
+- **Check Server Status**:  
+  **GET** `http://localhost:5005/api/status`  
+  Used to check if the backend server is running and available.
 
-- POST `/api/mood` { userId, mood, note }
-- GET `/api/mood/:userId`
-- POST `/api/help` { category, description, location }
-- GET `/api/help`
+---
 
-## ডিপ্লয়মেন্ট নোট
+## **System Design**
+For detailed system architecture and design, check out the [MonBondhu System Design](link-to-system-design-file).
 
-- MongoDB Atlas কানেকশন স্ট্রিং `.env` এ দিন
-- Backend: Render/Railway
-- Frontend: Vercel (`VITE_API_URL` প্রোডাকশন API URL দিন)
+---
 
+## **Tech Stack**
+- **Frontend**: React, Tailwind CSS, Axios, React Router
+- **Backend**: Node.js, Express.js, Mongoose (MongoDB)
+- **Database**: MongoDB (MongoDB Atlas)
+- **Hosting**: Vercel (Frontend), Render/Railway (Backend)
 
+---
+
+## **How to Run Locally**
+
+### **Frontend Setup**
+1. Clone the repository.
+2. Navigate to the `frontend` folder.
+3. Run `npm install` to install all dependencies.
+4. Run `npm run dev` to start the development server at **http://localhost:5173**.
+
+### **Backend Setup**
+1. Navigate to the `backend` folder.
+2. Install dependencies: `npm install`.
+3. Set up environment variables (like MongoDB URI, JWT secret, etc.).
+4. Run the backend server: `npm run dev` on **http://localhost:5005**.
+
+---
+
+## **Deployment**
+
+- **Frontend**: Deploy the frontend on **Vercel** for easy scaling.
+- **Backend**: Deploy the backend on **Render** or **Railway**.
+- **Database**: Use **MongoDB Atlas** for a scalable cloud database.
+
+---
+
+## **Testing**
+
+### **Backend Testing**
+- Test API routes using **Postman** or **Thunder Client**:
+  - **POST** `/api/mood`
+  - **GET** `/api/mood/:userId`
+  - **POST** `/api/help`
+  - **GET** `/api/help`
+
+### **Frontend Testing**
+- Manually test form submissions and data flow between frontend and backend.
+- Test responsiveness for mobile and desktop views.
+
+---
+
+## **Future Features**
+1. **Voice Input**: Allow users to track moods and submit help requests using voice.
+2. **Event Page**: Display upcoming health events users can attend.
+3. **Admin Features**: Enhance the admin dashboard to include detailed user engagement analytics.
+4. **Authentication (JWT)**: Add secure authentication for users and admins.
+
+---
+
+## **License**
+MIT License. See `LICENSE` for more details.
