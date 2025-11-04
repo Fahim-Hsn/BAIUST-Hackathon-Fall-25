@@ -1,0 +1,18 @@
+@import url('leaflet/dist/leaflet.css');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root {
+  height: 100%;
+}
+
+/* Unique soft gradient background */
+.mb-gradient {
+  background: radial-gradient(1200px 600px at 0% 0%, rgba(255, 179, 71, 0.18) 0%, transparent 50%),
+              radial-gradient(1000px 500px at 100% 0%, rgba(255, 130, 178, 0.20) 0%, transparent 55%),
+              linear-gradient(180deg, #ffffff 0%, #fbfbff 100%);
+}
+
+
